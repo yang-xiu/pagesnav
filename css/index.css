@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+body {
+    background: url(../imag/bgc2.jpg) no-repeat;
+    background-size: cover;
+
+}
+.mid {
+    position: relative;
+    background:rgba(255,255,255,.3);
+    left: 50%;
+    width: 900px;
+    height: 300px;
+    transform: translateX(-50%);
+    margin-top:250px;
+    padding: 20px;
+}
+.kbd {
+   position: absolute;
+   width: 76px;
+   height:70px;
+   margin: 20px 10px;
+   background-color: #000;
+   border-radius: 10px;
+}
+.kbd span {
+    position: absolute;
+    width: 64px;
+   height:61px;
+   margin: 1px;
+   border-radius: 10px;
+   background-color: #232323;
+   border:2px solid #373737;
+   padding-left: 6px;
+   font-size: 20px;
+}
+

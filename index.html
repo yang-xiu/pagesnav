@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小清新导航------每一天！</title>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/index.js"></script>
+</head>
+<body>
+    <div class="mid">
+
+    <div class="kbd loc1">
+        <span>Q</span>
+    </div>
+    <div class="kbd loc1" >
+        <span>W</span>
+    </div>
+    <div class="kbd loc1">
+        <span>E</span>
+    </div>
+    <div class="kbd loc1">
+        <span>R</span>
+    </div>
+    <div class="kbd loc1">
+        <span>T</span>
+    </div>
+    <div class="kbd loc1">
+        <span>Y</span>
+    </div>
+    <div class="kbd loc1">
+        <span>U</span>
+    </div>
+    <div class="kbd loc1">
+        <span>I</span>
+    </div>
+    <div class="kbd loc1">
+        <span>O</span>
+    </div>
+    <div class="kbd loc1">
+        <span>P</span>
+    </div>
+    <div class="kbd loc2">
+        <span>A</span>
+    </div>
+    <div class="kbd loc2">
+        <span>S</span>
+    </div>
+    <div class="kbd loc2">
+        <span>D</span>
+    </div>
+    <div class="kbd loc2">
+        <span>F</span>
+    </div>
+    <div class="kbd loc2">
+        <span>G</span>
+    </div>
+    <div class="kbd loc2">
+        <span>H</span>
+    </div>
+    <div class="kbd loc2">
+        <span>J</span>
+    </div>
+    <div class="kbd loc2">
+        <span>K</span>
+    </div>
+    <div class="kbd loc2">
+        <span>L</span>
+    </div>
+    <div class="kbd loc3">
+        <span>Z</span>
+    </div>
+    <div class="kbd loc3">
+        <span>X</span>
+    </div>
+    <div class="kbd loc3">
+        <span>C</span>
+    </div>
+    <div class="kbd loc3">
+        <span>V</span>
+    </div>
+    <div class="kbd loc3">
+        <span>B</span>
+    </div>
+    <div class="kbd loc3">
+        <span>N</span>
+    </div>
+    <div class="kbd loc3">
+        <span>M</span>
+    </div>
+
+
+    </div>
+
+    <script>
+var loc1=document.getElementsByClassName('loc1');
+var loc2=document.getElementsByClassName('loc2');
+var loc3=document.getElementsByClassName('loc3');
+var kbd=document.getElementsByClassName('kbd');
+
+// 布局键盘的位置
+var left1=15;
+for(var i=0;i<loc1.length;i++){
+ 
+ loc1[i].style.left=left1+'px';
+ left1+=90;
+
+}
+left1=65;
+for(var i=0;i<loc2.length;i++){
+    loc2[i].style.top='120px';
+ loc2[i].style.left=left1+'px';
+ left1+=90;
+
+}
+
+left1=155;
+for(var i=0;i<loc3.length;i++){
+    loc3[i].style.top='220px';
+ loc3[i].style.left=left1+'px';
+ left1+=90;
+
+}
+//给每个span添加一个index属性
+for(var i=0;i<kbd.length;i++){
+    var obj=kbd[i].getElementsByTagName('span');
+// console.log(obj);
+obj[0].setAttribute('index',i+'');
+}
+
+// 设置鼠标点击键盘弹出，填写连接
+for(var i=0;i<kbd.length;i++){
+    //每个都添加一个图片，默认src，查找本地存储，如果存在，则替换为图标。
+    var img=document.createElement('img');
+    kbd[i].appendChild(img);
+    img.style.display='block';
+    img.style.position='absolute';
+    img.style.zIndex='1';
+    img.style.bottom='7px';
+    img.style.left='5px';
+    img.style.width='16px';
+    img.style.height='16px';
+    var ind='index'+i;
+    img.src='./imag/img.png';
+    if(localStorage.getItem(ind)){
+     img.src=localStorage.getItem(ind);
+    }
+
+  kbd[i].onclick=function(event){
+    var link1=prompt("请填写需要保存的链接：");
+    var linka=link1.split('.com')[0]+'.com';
+    if(linka){//链接有效
+        var index=event.target.getAttribute('index');
+        var inx='index'+index;//存储的属性
+        linkb=linka+'/favicon.ico';//存储的数据
+        localStorage.setItem(inx, linkb);//存储在本地
+        // 更换图中的链接
+        kbd[index].lastElementChild.src=linkb;
+    }else{
+        var imga='./imag/img.png';
+        localStorage.setItem(inx, imga);//存储在本地
+        img.src=imga;
+    }
+//  console.log(img.src);
+
+
+}  
+}
+
+
+// 触发键盘按键，根据按键
+document.onkeydown=function(e){
+   //获取到键值。
+    var keyc=e.key.toUpperCase();
+    // 遍历kbd中的span，看匹配哪个kbd
+    for(var i=0;i<kbd.length;i++){
+     if(kbd[i].getElementsByTagName('span')[0].innerText===keyc){
+       var loca= kbd[i].getElementsByTagName('img')[0].src.split("/");
+       var locat='';
+       for(var j=0;j<loca.length-1;j++){
+locat+=loca[j];
+       }
+        location.href=locat;
+        
+         break;
+     }
+
+    }
+//     var index=e.target.getAttribute('index');
+//     var ind='index'+index;
+// location.href=localStorage.getItem(ind);
+
+}
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
