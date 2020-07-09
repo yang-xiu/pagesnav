@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="css/index.css">
     <script language="javascript" type="text/javascript">
 
-if (location.href == "https://yang-xiu.github.io/pagesnav/") {
-	window.location.replace("");
-}
-
-</script>
+        if (location.href == "https://yang-xiu.github.io/pagesnav/") {
+            window.location.replace("");
+        }
+        
+        </script>
 </head>
 <body>
     <div class="mid">
@@ -149,24 +149,28 @@ for(var i=0;i<kbd.length;i++){
     var ind='index'+i;
     img.src='./imag/img.png';
     if(localStorage.getItem(ind)){
-     img.src=localStorage.getItem(ind);
+     img.src=localStorage.getItem(ind).split('/')[0]+'//'+localStorage.getItem(ind).split('/')[2]+'/favicon.ico';
     }
 
   kbd[i].onclick=function(event){
     var link1=prompt("请填写需要保存的链接：");
-    var linka=link1.split('.com')[0]+'.com';
-    if(linka){//链接有效
+    if(link1){
+
         var index=event.target.getAttribute('index');
         var inx='index'+index;//存储的属性
-        linkb=linka+'/favicon.ico';//存储的数据
-        localStorage.setItem(inx, linkb);//存储在本地
+        localStorage.setItem(inx, link1);//存储在本地
         // 更换图中的链接
+        var linka=link1.split('/')[0]+'//'+link1.split('/')[2];
+         linkb=linka+'/favicon.ico';
+        if(linka){
         kbd[index].lastElementChild.src=linkb;
     }else{
         var imga='./imag/img.png';
-        localStorage.setItem(inx, imga);//存储在本地
         img.src=imga;
     }
+
+    }
+    
 //  console.log(img.src);
 
 
@@ -181,13 +185,11 @@ document.onkeydown=function(e){
     // 遍历kbd中的span，看匹配哪个kbd
     for(var i=0;i<kbd.length;i++){
      if(kbd[i].getElementsByTagName('span')[0].innerText===keyc){
-       var loca= kbd[i].getElementsByTagName('img')[0].src.split("/");
-       var locat='';
-       for(var j=0;j<loca.length-1;j++){
-locat+=loca[j];
-       }
-          window.location.href=locat;
-    //window.open(locat);
+       var loca= kbd[i].getElementsByTagName('span')[0].getAttribute('index');
+       var locat='index'+loca;
+var location1=localStorage.getItem(locat);
+        window.location.href=location1;
+        
          break;
      }
 
